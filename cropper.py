@@ -1,37 +1,48 @@
-from PIL import Image
 import os
-
-IMAGE_FILE_TYPE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
-
-
-def load_source_images():
-    source_images_dir_name = "source_images"
-    files = os.listdir(source_images_dir_name)
-    source_images = []
-    for file in files:
-        file_name, file_ext = os.path.splitext(file)
-        if file_ext.lower() in IMAGE_FILE_TYPE_EXTENSIONS:
-            file_path = os.path.join(source_images_dir_name, file)
-            source_images.append(Image.open(file_path))
-    return source_images
+from utils import load_source_images
+from constants import MAX_CROP_DIMENSION, CROPPED_IMAGES_DIR_NAME
 
 
 def get_square_image(image):
+    """
+    Given an image, resize an image to get an square image.
+    Resizing is done by taking the smallest dimension of width and height of the image
+    along with a Max limit
+    :param image:
+    :return:
+    """
     width, height = image.size
-    final_size = min(width, height, 500)
+    final_size = min(width, height, MAX_CROP_DIMENSION)
     return image.resize((final_size, final_size))
 
 
 def save_output_image(image, filename):
-    cropped_images_dir_name = "cropped_images"
-    file_path = os.path.join(cropped_images_dir_name, os.path.split(filename)[-1])
+    file_path = os.path.join(CROPPED_IMAGES_DIR_NAME, os.path.split(filename)[-1])
     image.save(file_path)
+
+
+def clean_output_dir():
+    output_dir = os.path.abspath(CROPPED_IMAGES_DIR_NAME)
+    print(output_dir)
+    if os.path.exists(output_dir):
+        for file in os.listdir(output_dir):
+            file_path = os.path.join(output_dir, file)
+            try:
+                if os.path.isfile(file_path):
+                    os.unlink(file_path)
+            except Exception as e:
+                print(e)
 
 
 if __name__ == "__main__":
     source_images = load_source_images()
+    clean_output_dir()
+
+    if len(source_images) == 0:
+        print("Add some source images")
+        exit(0)
+
     for source_image in source_images:
-        print(source_image.filename)
         square_image = get_square_image(source_image)
         save_output_image(square_image, source_image.filename)
 

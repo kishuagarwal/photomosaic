@@ -1,9 +1,9 @@
-from PIL import Image
-import os
 import math
 
-MOSAIC_SIZE = 10
-IMAGE_FILE_TYPE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+from PIL import Image
+
+from utils import load_source_images
+from constants import MOSAIC_SIZE
 
 
 def get_avg_color(image):
@@ -23,18 +23,6 @@ def get_avg_color(image):
     avg_g = avg_g // count
     avg_b = avg_b // count
     return avg_r, avg_g, avg_b
-
-
-def load_source_images():
-    source_images_dir_name = "source_images"
-    files = os.listdir(source_images_dir_name)
-    source_images = []
-    for file in files:
-        file_name, file_ext = os.path.splitext(file)
-        if file_ext.lower() in IMAGE_FILE_TYPE_EXTENSIONS:
-            file_path = os.path.join(source_images_dir_name, file)
-            source_images.append(Image.open(file_path))
-    return source_images
 
 
 def find_nearest_image(avg_color, images):
