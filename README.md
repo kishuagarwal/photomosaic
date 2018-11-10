@@ -10,7 +10,7 @@ Sample -
 
 # Input
 
-  [[https://github.com/kishuagarwal/photomosaic/blob/master/input.jpg]]
+  ![Input image](https://github.com/kishuagarwal/photomosaic/blob/master/input.jpg)
 
 # Output
   [[https://github.com/kishuagarwal/photomosaic/blob/master/output.jpg]]
