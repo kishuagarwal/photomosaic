@@ -8,9 +8,9 @@ The dataset used in the source_images directory is taken from [here](https://www
 
 Sample - 
 
-# Input
+### Input
 
   ![Input Image](https://github.com/kishuagarwal/photomosaic/blob/master/input.jpg)
 
-# Output
+### Output
   ![Output Image](https://github.com/kishuagarwal/photomosaic/blob/master/output.jpg)
