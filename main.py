@@ -89,4 +89,4 @@ if __name__ == "__main__":
             nearest_image = find_nearest_image(avg_color, source_images_avg_color)
             nearest_image = nearest_image.resize((MOSAIC_SIZE, MOSAIC_SIZE))
             output_image.paste(nearest_image, (x, y, x + MOSAIC_SIZE, y + MOSAIC_SIZE))
-    output_image.show()
+    output_image.save("output.jpg")
